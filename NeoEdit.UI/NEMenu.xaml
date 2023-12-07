@@ -692,6 +692,7 @@
 	</MenuItem>
 	<MenuItem Header="D_atabase">
 		<controls:NEMenuItem Header="_Connect" CommandEnum="Database_Connect" ToolTip="Connect to database"/>
+		<controls:NEMenuItem Header="_Test connection" CommandEnum="Database_TestConnection" ToolTip="Test connection string"/>
 		<controls:NEMenuItem Header="Execute _query" CommandEnum="Database_ExecuteQuery" ToolTip="Execute selected SQL queries"/>
 		<Separator/>
 		<controls:NEMenuItem Header="_Examine" CommandEnum="Database_Examine" ToolTip="Examine database info"/>

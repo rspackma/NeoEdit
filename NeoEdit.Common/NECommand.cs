@@ -393,6 +393,7 @@
 		Network_WCF_InterceptCalls,
 		Network_WCF_ResetClients,
 		Database_Connect,
+		Database_TestConnection,
 		Database_ExecuteQuery,
 		Database_Examine,
 		Database_GetSproc,

@@ -63,6 +63,23 @@ namespace NeoEdit.Editor
 			DBName = result.DBConnectInfo.Name;
 		}
 
+		void Execute__Database_TestConnection()
+		{
+			var strs = GetSelectionStrings().AsParallel().AsOrdered().Select(str =>
+			{
+				try
+				{
+					new DBConnectInfo() { Type = DBConnectInfo.DBType.MSSQL, ConnectionString = str }.GetConnection();
+					return "Success";
+				}
+				catch
+				{
+					return "Failed";
+				}
+			}).ToList();
+			ReplaceSelections(strs);
+		}
+
 		void Execute__Database_ExecuteQuery()
 		{
 			ValidateConnection();

@@ -880,6 +880,7 @@ namespace NeoEdit.Editor
 				case NECommand.Network_WCF_InterceptCalls: Execute__Network_WCF_InterceptCalls(); break;
 				case NECommand.Network_WCF_ResetClients: Execute__Network_WCF_ResetClients(); break;
 				case NECommand.Database_Connect: Execute__Database_Connect(); break;
+				case NECommand.Database_TestConnection: Execute__Database_TestConnection(); break;
 				case NECommand.Database_ExecuteQuery: Execute__Database_ExecuteQuery(); break;
 				case NECommand.Database_GetSproc: Execute__Database_GetSproc(); break;
 				case NECommand.KeyValue_Set_Keys_IgnoreCase: Execute__KeyValue_Set_Keys_IgnoreCase__KeyValue_Set_Keys_MatchCase__KeyValue_Set_Values1__KeyValue_Set_Values2__KeyValue_Set_Values3__KeyValue_Set_Values4__KeyValue_Set_Values5__KeyValue_Set_Values6__KeyValue_Set_Values7__KeyValue_Set_Values8__KeyValue_Set_Values9(0, false); break;
