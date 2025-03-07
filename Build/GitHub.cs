@@ -14,7 +14,7 @@ namespace Build
 {
 	class GitHub : IDisposable
 	{
-		const string baseUrl = "https://api.github.com/repos/xyandro/NeoEdit";
+		const string baseUrl = "https://api.github.com/repos/rspackma/NeoEdit";
 
 		readonly HttpClient client;
 

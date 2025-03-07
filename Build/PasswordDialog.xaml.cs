@@ -17,7 +17,7 @@ namespace Build
 		{
 			try
 			{
-				var data = Convert.FromBase64String("U339uZt0AFTraS/njytq681bwRp75lHFvCL4JCLv3nQTkp0ceiV0yEOAHQ2VaqGtqqalxBOOwJoYFVw4xK38fg==");
+				var data = Convert.FromBase64String("DyUoIELBonM2CUdSV+16gy8krNYc0n5D+4UfV8LJiFlNCtt+oXWK0cZXN320+o9aE3wmJ2aGw/0/rd/txZ3ksw==");
 				using (var alg = new AesCryptoServiceProvider())
 				{
 					alg.IV = Convert.FromBase64String("7gR10RNIeruIGYAFpIIKXg==");

@@ -21,7 +21,7 @@ namespace NeoEdit.Editor
 
 		static void PreExecute__Help_Update()
 		{
-			const string location = "https://github.com/xyandro/NeoEdit/releases";
+			const string location = "https://github.com/rspackma/NeoEdit/releases";
 			const string url = location + "/latest";
 			const string check = location + "/tag/";
 			const string exe = location + "/download/{0}/NeoEdit.msi";
