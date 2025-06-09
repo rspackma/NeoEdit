@@ -75,6 +75,7 @@ namespace NeoEdit.UI
 		public Configuration_Text_Find_Find RunDialog_Configure_Text_Find_Find(string text, HashSet<Coder.CodePage> codePages, NEVariables variables) => RunOnUIThread(() => Text_Find_Find_Dialog.Run(this, text, codePages, variables));
 		public Configuration_Text_Find_RegexReplace RunDialog_Configure_Text_Find_RegexReplace(string text) => RunOnUIThread(() => Text_Find_RegexReplace_Dialog.Run(this, text));
 		public Configuration_Text_Sort RunDialog_Configure_Text_Sort() => RunOnUIThread(() => Text_Sort_Dialog.Run(this));
+		public Configuration_Text_Transform RunDialog_Configure_Text_Transform(NEVariables variables) => RunOnUIThread(() => Text_Transform_Dialog.Run(this, variables));
 		public Configuration_Text_Random RunDialog_Configure_Text_Random(NEVariables variables) => RunOnUIThread(() => Text_Random_Dialog.Run(this, variables));
 		public Configuration_Text_Advanced_Unicode RunDialog_Configure_Text_Advanced_Unicode() => RunOnUIThread(() => Text_Advanced_Unicode_Dialog.Run(this));
 		public Configuration_Text_Advanced_FirstDistinct RunDialog_Configure_Text_Advanced_FirstDistinct() => RunOnUIThread(() => Text_Advanced_FirstDistinct_Dialog.Run(this));

@@ -166,6 +166,7 @@
 		Text_Unescape_Markup,
 		Text_Unescape_Regex,
 		Text_Unescape_URL,
+		Text_Transform,
 		Text_Random,
 		Text_Advanced_Unicode,
 		Text_Advanced_FirstDistinct,

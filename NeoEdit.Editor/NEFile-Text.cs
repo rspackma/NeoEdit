@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
+using System.Xml;
+using Microsoft.Web.XmlTransform;
 using NeoEdit.Common;
 using NeoEdit.Common.Configuration;
 using NeoEdit.Common.Enums;
@@ -72,6 +76,22 @@ namespace NeoEdit.Editor
 			}
 
 			return -1;
+		}
+
+		static string ApplyTransform(string xml, string transform)
+		{
+			var document = new XmlTransformableDocument { PreserveWhitespace = true };
+
+			using (var sourceStream = new StringReader(xml))
+				document.Load(sourceStream);
+
+			using (var transformation = new XmlTransformation(transform, false, default))
+				transformation.Apply(document);
+
+			var sb = new StringBuilder();
+			using (var outputWriter = XmlWriter.Create(sb, new XmlWriterSettings { Indent = true }))
+				document.WriteTo(outputWriter);
+			return sb.ToString();
 		}
 
 		static string GetRandomData(string chars, int length) => new string(Enumerable.Range(0, length).Select(num => chars[random.Next(chars.Length)]).ToArray());
@@ -672,6 +692,15 @@ namespace NeoEdit.Editor
 		void Execute__Text_Unescape_Regex() => ReplaceSelections(Selections.AsTaskRunner().Select(range => Regex.Unescape(Text.GetString(range))).ToList());
 
 		void Execute__Text_Unescape_URL() => ReplaceSelections(Selections.AsTaskRunner().Select(range => HttpUtility.UrlDecode(Text.GetString(range))).ToList());
+
+		static void Configure__Text_Transform() => state.Configuration = state.NEWindow.neWindowUI.RunDialog_Configure_Text_Transform(state.NEWindow.Focused.GetVariables());
+
+		void Execute__Text_Transform()
+		{
+			var result = state.Configuration as Configuration_Text_Transform;
+			var results = GetExpressionResults<string>(result.Expression, Selections.Count());
+			ReplaceSelections(Selections.AsTaskRunner().Select((range, index) => ApplyTransform(Text.GetString(range), results[index])).ToList());
+		}
 
 		static void Configure__Text_Random() => state.Configuration = state.NEWindow.neWindowUI.RunDialog_Configure_Text_Random(state.NEWindow.Focused.GetVariables());
 

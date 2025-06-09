@@ -45,6 +45,7 @@ namespace NeoEdit.Common
 		Configuration_Text_Find_Find RunDialog_Configure_Text_Find_Find(string text, HashSet<Coder.CodePage> codePages, NEVariables variables);
 		Configuration_Text_Find_RegexReplace RunDialog_Configure_Text_Find_RegexReplace(string text);
 		Configuration_Text_Sort RunDialog_Configure_Text_Sort();
+		Configuration_Text_Transform RunDialog_Configure_Text_Transform(NEVariables variables);
 		Configuration_Text_Random RunDialog_Configure_Text_Random(NEVariables variables);
 		Configuration_Text_Advanced_Unicode RunDialog_Configure_Text_Advanced_Unicode();
 		Configuration_Text_Advanced_FirstDistinct RunDialog_Configure_Text_Advanced_FirstDistinct();

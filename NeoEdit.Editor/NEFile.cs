@@ -385,6 +385,7 @@ namespace NeoEdit.Editor
 				case NECommand.Text_Trim: Configure__Text_Trim(); break;
 				case NECommand.Text_Width: Configure__Text_Width(); break;
 				case NECommand.Text_Sort: Configure__Text_Sort(); break;
+				case NECommand.Text_Transform: Configure__Text_Transform(); break;
 				case NECommand.Text_Random: Configure__Text_Random(); break;
 				case NECommand.Text_Advanced_Unicode: Configure__Text_Advanced_Unicode(); break;
 				case NECommand.Text_Advanced_FirstDistinct: Configure__Text_Advanced_FirstDistinct(); break;
@@ -657,6 +658,7 @@ namespace NeoEdit.Editor
 				case NECommand.Text_Unescape_Markup: Execute__Text_Unescape_Markup(); break;
 				case NECommand.Text_Unescape_Regex: Execute__Text_Unescape_Regex(); break;
 				case NECommand.Text_Unescape_URL: Execute__Text_Unescape_URL(); break;
+				case NECommand.Text_Transform: Execute__Text_Transform(); break;
 				case NECommand.Text_Random: Execute__Text_Random(); break;
 				case NECommand.Text_Advanced_Unicode: Execute__Text_Advanced_Unicode(); break;
 				case NECommand.Text_Advanced_FirstDistinct: Execute__Text_Advanced_FirstDistinct(); break;

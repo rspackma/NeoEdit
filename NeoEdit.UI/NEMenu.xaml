@@ -311,6 +311,7 @@
 			<controls:NEMenuItem Header="_Regex" CommandEnum="Text_Unescape_Regex" ToolTip="Unescape regular expression"/>
 			<controls:NEMenuItem Header="_URL" CommandEnum="Text_Unescape_URL" ToolTip="Unescape URL"/>
 		</MenuItem>
+		<controls:NEMenuItem Header="T_ransform" CommandEnum="Text_Transform" ToolTip="Transform markup"/>
 		<Separator/>
 		<controls:NEMenuItem Header="R_andom" CommandEnum="Text_Random" ToolTip="Create random text"/>
 		<Separator/>
