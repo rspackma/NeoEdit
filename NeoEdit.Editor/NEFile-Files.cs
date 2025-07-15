@@ -349,21 +349,15 @@ namespace NeoEdit.Editor
 			}
 		}
 
-		JToken ExtractPDF(CObject cObject)
+		JToken ExtractPDF(CObject cObject, HashSet<OpCode> opCodes)
 		{
 			if (cObject is COperator cOperator)
 			{
-				if ((cOperator.OpCode.OpCodeName != OpCodeName.Tj) && (cOperator.OpCode.OpCodeName != OpCodeName.Td))
-					return null;
-				var result = new JObject
-				{
-					new JProperty("OpCode", cOperator.OpCode.Name),
-					new JProperty("Operands", new JArray(cOperator.Operands.Select(ExtractPDF)))
-				};
-				return result;
+				opCodes.Add(cOperator.OpCode);
+				return new JObject { new JProperty(cOperator.OpCode.Name, new JArray(cOperator.Operands.Select(x => ExtractPDF(x, opCodes)))) };
 			}
 			else if (cObject is CSequence cSequence)
-				return new JArray(cSequence.Select(ExtractPDF).NonNull());
+				return new JArray(cSequence.Select(x => ExtractPDF(x, opCodes)).NonNull());
 			else if (cObject is CString cString)
 				return new JValue(cString.Value);
 			else if (cObject is CInteger cInteger)
@@ -372,13 +366,17 @@ namespace NeoEdit.Editor
 				return new JValue(cReal.Value);
 			else if (cObject is CName cName)
 				return new JValue(cName.Name);
-			return new JObject(new JProperty("Type", cObject.GetType().FullName));
+			else
+				return new JObject(new JProperty("Unknown type", cObject.GetType().FullName));
 		}
 
-		string GetPDF(string fileName)
+		string GetPDFText(string fileName)
 		{
 			using var doc = PdfReader.Open(fileName, PdfDocumentOpenMode.Import);
-			var jobject = new JObject(new JProperty("Pages", new JArray(doc.Pages.Cast<PdfPage>().Select(x => ExtractPDF(ContentReader.ReadContent(x))))));
+			var opCodes = new HashSet<OpCode>();
+			var pages = new JArray(doc.Pages.Cast<PdfPage>().Select(x => ExtractPDF(ContentReader.ReadContent(x), opCodes)));
+			var opCodesObject = new JObject(opCodes.Select(x => new JProperty(x.Name, x.Description)));
+			var jobject = new JObject(new JProperty("Pages", pages), new JProperty("OpCodes", opCodesObject));
 			return jobject.ToString();
 		}
 
@@ -1007,6 +1005,6 @@ namespace NeoEdit.Editor
 					item => inputs[item].Sum(fileName => new FileInfo(fileName).Length));
 		}
 
-		void Execute__Files_Advanced_ExtractPDF() => ReplaceSelections(Selections.AsTaskRunner().Select(range => GetPDF(Text.GetString(range))).ToList());
+		void Execute__Files_Advanced_ExtractPDF() => ReplaceSelections(Selections.AsTaskRunner().Select(range => GetPDFText(Text.GetString(range))).ToList());
 	}
 }
