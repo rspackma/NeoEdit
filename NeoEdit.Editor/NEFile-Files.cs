@@ -15,6 +15,11 @@ using NeoEdit.Common.Transform;
 using NeoEdit.Editor.PreExecution;
 using NeoEdit.Editor.Searchers;
 using NeoEdit.TaskRunning;
+using Newtonsoft.Json.Linq;
+using PdfSharp.Pdf;
+using PdfSharp.Pdf.Content;
+using PdfSharp.Pdf.Content.Objects;
+using PdfSharp.Pdf.IO;
 
 namespace NeoEdit.Editor
 {
@@ -342,6 +347,39 @@ namespace NeoEdit.Editor
 			{
 				return QueryUser(nameof(TextSearchFile), $"Unable to read {fileName}.\n\n{ex.Message}\n\nLeave selected?", MessageOptions.None);
 			}
+		}
+
+		JToken ExtractPDF(CObject cObject)
+		{
+			if (cObject is COperator cOperator)
+			{
+				if ((cOperator.OpCode.OpCodeName != OpCodeName.Tj) && (cOperator.OpCode.OpCodeName != OpCodeName.Td))
+					return null;
+				var result = new JObject
+				{
+					new JProperty("OpCode", cOperator.OpCode.Name),
+					new JProperty("Operands", new JArray(cOperator.Operands.Select(ExtractPDF)))
+				};
+				return result;
+			}
+			else if (cObject is CSequence cSequence)
+				return new JArray(cSequence.Select(ExtractPDF).NonNull());
+			else if (cObject is CString cString)
+				return new JValue(cString.Value);
+			else if (cObject is CInteger cInteger)
+				return new JValue(cInteger.Value);
+			else if (cObject is CReal cReal)
+				return new JValue(cReal.Value);
+			else if (cObject is CName cName)
+				return new JValue(cName.Name);
+			return new JObject(new JProperty("Type", cObject.GetType().FullName));
+		}
+
+		string GetPDF(string fileName)
+		{
+			using var doc = PdfReader.Open(fileName, PdfDocumentOpenMode.Import);
+			var jobject = new JObject(new JProperty("Pages", new JArray(doc.Pages.Cast<PdfPage>().Select(x => ExtractPDF(ContentReader.ReadContent(x))))));
+			return jobject.ToString();
 		}
 
 		void Execute__Files_Select_Files() => Selections = Selections.AsTaskRunner().Where(range => File.Exists(FileName.RelativeChild(Text.GetString(range)))).ToList();
@@ -968,5 +1006,7 @@ namespace NeoEdit.Editor
 					(item, index, progress) => CombineFiles(outputFiles[index], inputs[index], progress),
 					item => inputs[item].Sum(fileName => new FileInfo(fileName).Length));
 		}
+
+		void Execute__Files_Advanced_ExtractPDF() => ReplaceSelections(Selections.AsTaskRunner().Select(range => GetPDF(Text.GetString(range))).ToList());
 	}
 }

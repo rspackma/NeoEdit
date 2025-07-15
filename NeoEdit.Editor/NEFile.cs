@@ -750,6 +750,7 @@ namespace NeoEdit.Editor
 				case NECommand.Files_Advanced_DragDrop: Execute__Files_Advanced_DragDrop(); break;
 				case NECommand.Files_Advanced_SplitFiles: Execute__Files_Advanced_SplitFiles(); break;
 				case NECommand.Files_Advanced_CombineFiles: Execute__Files_Advanced_CombineFiles(); break;
+				case NECommand.Files_Advanced_ExtractPDF: Execute__Files_Advanced_ExtractPDF(); break;
 				case NECommand.Content_Type_SetFromExtension: Execute__Content_Type_SetFromExtension(); break;
 				case NECommand.Content_Type_None: Execute__Content_Type_None__Content_Type_Balanced__Content_Type_Columns__Content_Type_CPlusPlus__Content_Type_CSharp__Content_Type_CSV__Content_Type_ExactColumns__Content_Type_HTML__Content_Type_JSON__Content_Type_SQL__Content_Type_TSV__Content_Type_XML(ParserType.None); break;
 				case NECommand.Content_Type_Balanced: Execute__Content_Type_None__Content_Type_Balanced__Content_Type_Columns__Content_Type_CPlusPlus__Content_Type_CSharp__Content_Type_CSV__Content_Type_ExactColumns__Content_Type_HTML__Content_Type_JSON__Content_Type_SQL__Content_Type_TSV__Content_Type_XML(ParserType.Balanced); break;

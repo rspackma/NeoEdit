@@ -472,6 +472,8 @@
 			<Separator/>
 			<controls:NEMenuItem Header="_Split files" CommandEnum="Files_Advanced_SplitFiles" ToolTip="Split selected files into smaller ones"/>
 			<controls:NEMenuItem Header="_Combine files" CommandEnum="Files_Advanced_CombineFiles" ToolTip="Combine selected files into bigger one"/>
+			<Separator/>
+			<controls:NEMenuItem Header="Extract _PDF" CommandEnum="Files_Advanced_ExtractPDF" ToolTip="Extract PDF contents"/>
 		</MenuItem>
 	</MenuItem>
 	<MenuItem Header="_Content">

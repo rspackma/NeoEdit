@@ -258,6 +258,7 @@
 		Files_Advanced_DragDrop,
 		Files_Advanced_SplitFiles,
 		Files_Advanced_CombineFiles,
+		Files_Advanced_ExtractPDF,
 		Content_Type_SetFromExtension,
 		Content_Type_None,
 		Content_Type_Balanced,
