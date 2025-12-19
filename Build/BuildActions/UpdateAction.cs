@@ -7,7 +7,7 @@
 		public override void Run(WriteTextDelegate writeText)
 		{
 			const string remoteName = "origin";
-			const string localBranch = "master";
+			const string localBranch = "main";
 			const string remoteBranch = remoteName + "/" + localBranch;
 
 			writeText($"Fetching {remoteName}...");

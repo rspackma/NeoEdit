@@ -83,7 +83,7 @@ namespace Build
 		{
 			using (var request = new HttpRequestMessage(HttpMethod.Post, $"{baseUrl}/releases"))
 			{
-				var json = $@"{{ ""tag_name"": ""{tagName}"", ""target_commitish"": ""master"", ""name"": ""NeoEdit {tagName}"", ""draft"": false, ""body"": ""![neoedit](https://cloud.githubusercontent.com/assets/13739632/21296705/19308aea-c52f-11e6-9071-88816d9ceedf.png)\r\n"" }}";
+				var json = $@"{{ ""tag_name"": ""{tagName}"", ""target_commitish"": ""main"", ""name"": ""NeoEdit {tagName}"", ""draft"": false, ""body"": ""![neoedit](https://cloud.githubusercontent.com/assets/13739632/21296705/19308aea-c52f-11e6-9071-88816d9ceedf.png)\r\n"" }}";
 				request.Content = new StringContent(json, Encoding.UTF8, "application/json");
 
 				var response = await SendMessage(request);
