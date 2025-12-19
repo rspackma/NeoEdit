@@ -45,6 +45,8 @@ namespace NeoEdit.UI.Controls
 			ResizeMode = ResizeMode.CanResizeWithGrip;
 			AllowsTransparency = true;
 			Template = GetTemplate();
+
+			SourceInitialized += (s, e) => Win32.SetupMinMaxInfo(this);
 		}
 
 		public new bool ShowDialog()
@@ -189,7 +191,7 @@ namespace NeoEdit.UI.Controls
 
 			var windowStateTrigger = new Trigger { Property = WindowStateProperty, Value = WindowState.Maximized };
 			windowStateTrigger.Setters.Add(new Setter { TargetName = outerBorder.Name, Property = Border.CornerRadiusProperty, Value = new CornerRadius(0) });
-			windowStateTrigger.Setters.Add(new Setter { TargetName = outerBorder.Name, Property = Border.BorderThicknessProperty, Value = new Thickness(7) });
+			windowStateTrigger.Setters.Add(new Setter { TargetName = outerBorder.Name, Property = Border.BorderThicknessProperty, Value = new Thickness(0) });
 			windowStateTrigger.Setters.Add(new Setter { TargetName = outerBorder.Name, Property = Border.BackgroundProperty, Value = Brushes.Black });
 			windowStateTrigger.Setters.Add(new Setter { TargetName = rect.Name, Property = VisibilityProperty, Value = Visibility.Visible });
 			template.Triggers.Add(windowStateTrigger);
