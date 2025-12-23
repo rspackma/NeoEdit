@@ -39,7 +39,7 @@ namespace Build.BuildActions
 			text = $@"{text[..match.Index]}<AssemblyVersion>{version}</AssemblyVersion>{text[(match.Index + match.Length)..]}";
 			text = Replace(text, @"<FileVersion>1\.1\.1\.1</FileVersion>", $"<FileVersion>{version}</FileVersion>");
 			text = Replace(text, @"<Version>1\.1\.1\.1</Version>", $"<Version>{version}</Version>");
-			text = Replace(text, @"<Copyright>© Randon Spackensen 2013-2013</Copyright>", $"<Copyright>© Randon Spackensen 2013-{DateTime.Now.Year}</Copyright>");
+			text = Replace(text, @"<Copyright>© Randon Spackman 2013-2013</Copyright>", $"<Copyright>© Randon Spackman 2013-{DateTime.Now.Year}</Copyright>");
 
 			File.WriteAllText(path, text, Encoding.UTF8);
 
@@ -51,7 +51,7 @@ namespace Build.BuildActions
 			var path = Path.Combine(App.Location, "GlobalAssemblyInfo.cs");
 			var text = File.ReadAllText(path);
 
-			text = Replace(text, @"\[assembly: AssemblyCopyright\(""© Randon Spackensen 2013-2013""\)]", $@"[assembly: AssemblyCopyright(""© Randon Spackensen 2013-{DateTime.Now.Year}"")]");
+			text = Replace(text, @"\[assembly: AssemblyCopyright\(""© Randon Spackman 2013-2013""\)]", $@"[assembly: AssemblyCopyright(""© Randon Spackman 2013-{DateTime.Now.Year}"")]");
 			text = Replace(text, @"\[assembly: AssemblyVersion\(""1\.1\.1\.1""\)]", $@"[assembly: AssemblyVersion(""{version}"")]");
 			text = Replace(text, @"\[assembly: AssemblyFileVersion\(""1\.1\.1\.1""\)]", $@"[assembly: AssemblyFileVersion(""{version}"")]");
 

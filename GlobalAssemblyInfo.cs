@@ -2,9 +2,9 @@
 using System.Resources;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyCompany("Randon Spackensen")]
+[assembly: AssemblyCompany("Randon Spackman")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCopyright("© Randon Spackensen 2013-2013")]
+[assembly: AssemblyCopyright("© Randon Spackman 2013-2013")]
 [assembly: AssemblyCulture("")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyProduct("NeoEdit")]
