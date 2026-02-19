@@ -119,8 +119,19 @@ namespace NeoEdit.WCF
 		public string ExecuteWCF(string str)
 		{
 			str = Regex.Replace(str, @"/\*.*?\*/", "", RegexOptions.Singleline | RegexOptions.Multiline);
-			var client = GetWCFClient(JsonConvert.DeserializeObject<WCFOperation>(str).ServiceURL);
-			return client.DoExecuteWCF(str);
+			for (var tries = 0; tries < 2; ++tries)
+			{
+				try
+				{
+					var client = GetWCFClient(JsonConvert.DeserializeObject<WCFOperation>(str).ServiceURL);
+					return client.DoExecuteWCF(str);
+				}
+				catch (Exception ex) when (ex.Message.Contains(" has been disconnected or does not exist at the server."))
+				{
+					ResetClients();
+				}
+			}
+			throw new Exception("Unable to send command");
 		}
 	}
 }
